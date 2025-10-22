@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/AppContext";
 
 export default function CarritoCompras() {
-    const { carrito, vaciarCarrito } = useAppContext();
+    const { carrito, vaciarCarrito, agregarAlCarrito ,quitarCantidad } = useAppContext();
     const navigate = useNavigate();
 
     const irAPagar = () => {
@@ -25,7 +25,7 @@ export default function CarritoCompras() {
                             {item.title} - ${Number(item.price).toFixed(3)}
                             (Cantidad: {item.cantidad || 1})
                             <button onClick={() => quitarCantidad(item.id)}>-</button>
-                            <button onClick={() => agregarCantidad(item.id)}>+</button>
+                            <button onClick={() => agregarAlCarrito(item)}>+</button>
                         </div>
                     ))}
                     <div>

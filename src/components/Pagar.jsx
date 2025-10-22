@@ -7,7 +7,7 @@ export default function Pagar() {
 
     // Calculo del total
     const total = carrito.reduce(
-        (suma, producto) => suma + Number(producto.precio),
+        (suma, producto) => suma + Number(producto.price),
         0
     );
 
@@ -41,7 +41,7 @@ export default function Pagar() {
                     <strong>${producto.price}</strong>
                 </div>
                 ))}
-                <h3>Total a pagar: ${total}</h3>
+                <h3>Total a pagar: ${Number(total).toFixed(3)}</h3>
             </>
             ) : (
             <p>No hay productos en el carrito</p>

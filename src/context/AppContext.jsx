@@ -28,6 +28,21 @@ export function AppProvider({ children }) {
         }
     };
 
+    const quitarCantidad = (productoId) => {
+        const productoExistente = carrito.find(item => item.id === productoId);
+
+        if (productoExistente && productoExistente.cantidad === 1) {
+            eliminarDelCarrito(productoId);
+        } else {
+            setCarrito(carrito.map(item =>
+                item.id === productoId
+                ? { ...item, cantidad: item.cantidad - 1 } 
+                : item
+            ));
+        }
+    };
+
+
     const vaciarCarrito = () => {
         setCarrito([]);
     };
@@ -56,7 +71,8 @@ export function AppProvider({ children }) {
         carrito,
         agregarAlCarrito,
         vaciarCarrito,
-        eliminarDelCarrito
+        eliminarDelCarrito,
+        quitarCantidad
     };
 
     return (
