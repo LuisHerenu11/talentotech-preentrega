@@ -1,39 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../context/AppContext";
 
-export default function CarritoCompras({ carrito, setCarrito }) {
+export default function CarritoCompras() {
+    const { carrito, vaciarCarrito } = useAppContext();
     const navigate = useNavigate();
-
-    const vaciarCarrito = () => {
-        setCarrito([]);
-    };
-
-    const quitarCantidad = (idProducto) => {
-        const carritoActualizado = carrito.map(producto => {
-            if (producto.id === idProducto) {
-                const cantidadActual = producto.cantidad || 1;
-                if (cantidadActual === 1) {
-                    return null;
-                }
-                    return { ...producto, cantidad: cantidadActual - 1 };
-            }
-            return producto;
-        }).filter(producto => producto !== null);
-        setCarrito(carritoActualizado);
-    };
-
-    const agregarCantidad = (idProducto) => {
-    const nuevoCarrito = carrito.map(producto => {
-        if (producto.id === idProducto) {
-            return {
-                ...producto,
-                cantidad: (producto.cantidad || 1) + 1
-            };
-        }
-            return producto;
-        });
-        setCarrito(nuevoCarrito);
-    };
 
     const irAPagar = () => {
         navigate("/pagar", { state: { carrito } });

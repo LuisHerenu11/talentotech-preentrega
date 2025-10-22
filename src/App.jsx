@@ -6,18 +6,26 @@ import Footer from './components/Footer';
 import Inicio from './components/Inicio';
 import Productos from './components/Productos';
 import ProductoDetalle from './components/ProductoDetalle';
+import { AppProvider } from './context/AppContext'
+import RutaProtegida from "./components/RutaProtegida";
+import IniciarSesion from "./components/IniciarSesion";
+import Pagar from "./components/Pagar";
 
 function App() {
   
   return (
-      <div>
-        <Header/>
-        <Routes>
-          <Route path='/' element={<Inicio/>}/>
-          <Route path='/productos' element={<Productos/>}/>
-          <Route path="/productos/:id" element={<ProductoDetalle />} />
-        </Routes>
-        <Footer/>
-      </div>
+      <AppProvider>
+        <div>
+          <Header/>
+          <Routes>
+            <Route path='/' element={<Inicio/>}/>
+            <Route path='/productos' element={<Productos/>}/>
+            <Route path="/productos/:id" element={<ProductoDetalle />}/>
+            <Route path="/iniciar-sesion" element={<IniciarSesion />}/>
+            <Route path="/pagar" element={ <RutaProtegida><Pagar/></RutaProtegida>}/>
+          </Routes>
+          <Footer/>
+        </div>
+      </AppProvider>
   )
 }export default App
