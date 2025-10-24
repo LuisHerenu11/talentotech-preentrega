@@ -1,0 +1,138 @@
+/* Contenedor principal de la sección de productos */
+.productos-container {
+    background-color: #F5F5DC;
+    padding: 12px 4px; 
+    width: 100%;
+    box-sizing: border-box; 
+}
+
+/* La lista (<ul>) que se convertirá en nuestra grilla */
+.productos-lista {
+    display: grid;
+    gap: 4px; /* Espacio entre los productos */
+    
+    /* 1. Mobile-First: 1 columna por defecto */
+    grid-template-columns: 1fr;
+    
+    /* Quita los estilos de lista (viñetas) */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    /* Fuerza a todos los items de la fila a tener la misma altura */
+    align-items: stretch; 
+}
+
+/* 2. Tablet: 2 columnas */
+@media (min-width: 600px) {
+    .productos-lista {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 3. Desktop: 4 columnas  */
+@media (min-width: 992px) {
+    .productos-lista {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+/* Estilos para cada "tarjeta" de producto (<li>) */
+.productos-lista .producto-item {
+    /*background-color: #ffffff;*/
+    background-color: #000000;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    text-align: center;
+    
+    /* Flexbox para alinear contenido dentro de la tarjeta */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    /* Define una altura mínima para TODAS las tarjetas */
+    min-height: 300px;
+}
+
+.producto-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Imagen del producto */
+.producto-item img {
+    max-width: 100%;
+    height: 200px; 
+    object-fit: contain; /* 'contain' evita que la imagen se deforme */
+    margin-bottom: 15px;
+}
+
+/* Título del producto */
+.producto-item h3 {
+    font-size: 1rem;
+    color: #D4AF37;
+    /* Truco para limitar el texto a 2 líneas */
+    height: 3.2em; /* (aprox 2 líneas de texto) */
+    line-height: 1.6em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 0 10px 0;
+}
+
+/* Precio del producto */
+.producto-item p {
+    font-size: 1.2em;
+    font-weight: bold;
+    /*color: #800020;*/
+    color: #50C878; 
+    margin: 10px 0;
+}
+
+/* Contenedor para los botones */
+.producto-botones {
+    margin-top: auto;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 8px; 
+}
+
+/* Estilo general de los botones */
+.producto-item button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: opacity 0.2s ease; 
+}
+
+.producto-item button:hover {
+    opacity: 0.8;
+}
+
+/* Botón "Comprar" (principal) */
+.producto-item .btn-comprar {
+    background-color: #800020;
+    color: #eae6ca;
+    white-space: nowrap;
+}
+
+/* Botón "Más detalles" (secundario) */
+.producto-item .btn-detalles {
+    background-color: #6c757d;
+    color: white;
+    width: 100%; 
+    white-space: nowrap;
+}
+
+/* Estilo para el Link que envuelve al botón de detalles */
+.btn-detalles-link {
+  text-decoration: none; /* Quita el subrayado del link */
+  display: block; /* Permite que el botón interno use width: 100% */
+}

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
 import CarritoCompras from "./Carrito";
 import { useAppContext } from "../context/AppContext";
+import "../styles/productosStyles.css";
 
 export default function Productos () {
     const [productos, setProductos] = useState ([]);
@@ -26,14 +27,16 @@ export default function Productos () {
     if (error) return <p>{ error }</p>;
     
     return (
-        <div style={{backgroundColor: '#F5F5DC'}}>
-            <ul> {productos.map((producto) => (
-                <li key ={ producto.id}>
+        <div className='productos-container'>
+            <ul className='productos-lista'> {productos.map((producto) => (
+                <li className='producto-item' key={producto.id}>
                     <img src={producto.image}/>                
                     <h3>{producto.title}</h3>
-                    <p style={{ fontSize: '1.2em', fontWeight: 'bold' }}>${producto.price}</p>
-                    <Link to={`/productos/${producto.id}`} state={{producto}}><button>Más detalles</button></Link>
-                    <button onClick={() => agregarAlCarrito(producto)}>Comprar</button>
+                    <p>${producto.price}</p>
+                    <div className="producto-botones">
+                        <Link to={`/productos/${producto.id}`} state={{producto}} className="btn-detalles-link"><button className="btn-detalles">Más detalles</button></Link>
+                        <button className="btn-comprar" onClick={() => agregarAlCarrito(producto)}>Comprar</button>
+                    </div>
                 </li>
                 ))}
             </ul>
