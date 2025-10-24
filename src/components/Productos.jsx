@@ -26,7 +26,7 @@ export default function Productos () {
     if (error) return <p>{ error }</p>;
     
     return (
-        <div>
+        <div style={{backgroundColor: '#F5F5DC'}}>
             <ul> {productos.map((producto) => (
                 <li key ={ producto.id}>
                     <img src={producto.image}/>                

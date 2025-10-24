@@ -1,8 +1,9 @@
 import React from 'react';
+import '../styles/footerStyles.css';
 
 function Footer(){
     return(
-        <footer style={{backgroundColor: "#2f00ffff", textAlign: "center", color:"white"}}>
+        <footer className='footer'>
             <p>
                 &copy; 2025 - LMH SERVICES
             </p>

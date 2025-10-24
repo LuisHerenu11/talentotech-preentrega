@@ -17,6 +17,8 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  width: 99vw !important;
+  height: 100vh !important;
+  min-width: 98vw !important;
+  min-height: 100vh !important;
 }

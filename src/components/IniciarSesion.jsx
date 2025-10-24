@@ -28,29 +28,29 @@ export default function IniciarSesion() {
     };
 
     return (
-        <div>
-        <h1>Inicia sesión para continuar</h1>
-        <form onSubmit={manejarEnvio}>
-            <input
-            type="text"
-            placeholder="Nombre completo"
-            value={formulario.nombre}
-            onChange={(e) => setFormulario({...formulario, nombre: e.target.value})}
-            required
-            />
-            <input
-            type="email"
-            placeholder="Email"
-            value={formulario.email}
-            onChange={(e) => setFormulario({...formulario, email: e.target.value})}
-            required
-            />
-            <button type="submit">Iniciar Sesión</button>
-            <strong> </strong>
-            <button type="button" onClick={() => navigate('/productos')}>
-            Cancelar
-            </button>
-        </form>
+        <div style={{width:'100vw',height:'88vh', color:'#eae6ca',backgroundColor:'black', opacity:'90%'}}>
+            <h1>Inicia sesión para continuar</h1>
+            <form onSubmit={manejarEnvio}>
+                <input
+                type="text"
+                placeholder="Nombre completo"
+                value={formulario.nombre}
+                onChange={(e) => setFormulario({...formulario, nombre: e.target.value})}
+                required
+                />
+                <input
+                type="email"
+                placeholder="Email"
+                value={formulario.email}
+                onChange={(e) => setFormulario({...formulario, email: e.target.value})}
+                required
+                />
+                <button type="submit">Iniciar Sesión</button>
+                <strong> </strong>
+                <button type="button" onClick={() => navigate('/productos')}>
+                Cancelar
+                </button>
+            </form>
         </div>
     );
 }

@@ -15,7 +15,7 @@ function App() {
   
   return (
       <AppProvider>
-        <div>
+        <div style={{minHeight: '100vh'}}>
           <Header/>
           <Routes>
             <Route path='/' element={<Inicio/>}/>
