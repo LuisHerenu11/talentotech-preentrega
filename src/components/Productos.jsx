@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
-import CarritoCompras from "./Carrito";
 import { useAppContext } from "../context/AppContext";
 import "../styles/productosStyles.css";
 
@@ -40,7 +39,6 @@ export default function Productos () {
                 </li>
                 ))}
             </ul>
-            <CarritoCompras/>
         </div>
     );
 }
