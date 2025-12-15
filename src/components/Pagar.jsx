@@ -36,9 +36,9 @@ export default function Pagar() {
             <>
                 {carrito.map((producto) => (
                 <div key={producto.id}>
-                    <img src={producto.image} alt={producto.title} width="60" />
-                    <span>{producto.title}</span>
-                    <strong>${producto.price}</strong>
+                    <img src={producto.avatar} alt={producto.nombre} width="60" />
+                    <span>{producto.nombre}</span>
+                    <strong>${producto.precio}</strong>
                 </div>
                 ))}
                 <h3>Total a pagar: ${Number(total).toFixed(3)}</h3>

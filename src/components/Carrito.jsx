@@ -9,8 +9,8 @@ export default function CarritoCompras() {
     const irAPagar = () => {
         navigate("/pagar", { state: { carrito } });
     };
-
-    const total = carrito.reduce((sum, item) => sum + (Number(item.price) * (item.cantidad || 1)), 0);
+    // reduce un array a un valor único((valorAcumulado, valorActual) => (valorAcumulado + valorActual), valorInicial)  
+    const total = carrito.reduce((sum, item) => sum + (Number(item.precio) * (item.cantidad || 1)), 0);
 
     return (
         <div>
@@ -22,7 +22,7 @@ export default function CarritoCompras() {
                 <>
                     {carrito.map((item) => (
                         <div key={item.id}>
-                            {item.title} - ${Number(item.price).toFixed(3)}
+                            {item.nombre} - ${Number(item.precio).toFixed(3)}
                             (Cantidad: {item.cantidad || 1})
                             <button onClick={() => quitarCantidad(item.id)}>-</button>
                             <button onClick={() => agregarAlCarrito(item)}>+</button>

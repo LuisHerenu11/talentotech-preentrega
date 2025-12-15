@@ -11,7 +11,7 @@ export default function Productos () {
     const { agregarAlCarrito } = useAppContext();
 
     useEffect (() => { 	
-        fetch('https://fakestoreapi.com/products')
+        fetch("https://693da8baf55f1be793036abd.mockapi.io/api/productos")
         .then((response) => response.json())
         .then((data) => {setProductos(data); setCargando(false);})
         .catch((error) => 
@@ -21,7 +21,7 @@ export default function Productos () {
                 setCargando(false); 
             });
     }, []);
-
+    
     if (cargando) return <p> Cargando productos... </p>;
     if (error) return <p>{ error }</p>;
     
@@ -29,9 +29,10 @@ export default function Productos () {
         <div className='productos-container'>
             <ul className='productos-lista'> {productos.map((producto) => (
                 <li className='producto-item' key={producto.id}>
-                    <img src={producto.image}/>                
-                    <h3>{producto.title}</h3>
-                    <p>${producto.price}</p>
+                    <img src={producto.avatar}/>                
+                    <h3>{producto.nombre}</h3>
+                    <p>{producto.descripcion}</p>
+                    <p>${producto.precio}</p>
                     <div className="producto-botones">
                         <Link to={`/productos/${producto.id}`} state={{producto}} className="btn-detalles-link"><button className="btn-detalles">Más detalles</button></Link>
                         <button className="btn-comprar" onClick={() => agregarAlCarrito(producto)}>Comprar</button>

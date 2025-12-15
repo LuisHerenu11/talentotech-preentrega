@@ -14,7 +14,7 @@ function Navbar() {
 
     // totales
     const totalItems = carrito.reduce((sum, item) => sum + (item.cantidad || 1), 0);
-    const total = carrito.reduce((sum, item) => sum + (Number(item.price) * (item.cantidad || 1)), 0);
+    const total = carrito.reduce((sum, item) => sum + (Number(item.precio) * (item.cantidad || 1)), 0);
 
     // toggle de carrito
     const toggleCart = () => {
@@ -47,7 +47,7 @@ function Navbar() {
                                     <div className="cart-dropdown-items">
                                         {carrito.map((item) => (
                                             <div key={item.id} className="cart-dropdown-item">
-                                                <span>{item.title} (${Number(item.price).toFixed(3)})</span>
+                                                <span>{item.nombre} (${Number(item.precio).toFixed(3)})</span>
                                                 <div className='cart-item-controls'>
                                                     <button onClick={() => quitarCantidad(item.id)}>-</button>
                                                     <span>{item.cantidad}</span>
