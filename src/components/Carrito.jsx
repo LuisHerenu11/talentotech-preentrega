@@ -1,16 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppContext } from "../context/AppContext";
+import { useCartContext } from "../context/CartContext";
 
 export default function CarritoCompras() {
-    const { carrito, vaciarCarrito, agregarAlCarrito ,quitarCantidad } = useAppContext();
+    const { carrito, vaciarCarrito, agregarAlCarrito ,quitarCantidad } = useCartContext();
     const navigate = useNavigate();
 
     const irAPagar = () => {
         navigate("/pagar", { state: { carrito } });
     };
-    // reduce un array a un valor único((valorAcumulado, valorActual) => (valorAcumulado + valorActual), valorInicial)  
-    const total = carrito.reduce((sum, item) => sum + (Number(item.precio) * (item.cantidad || 1)), 0);
 
     return (
         <div>

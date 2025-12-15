@@ -18,6 +18,12 @@ export default function Pagar() {
         navigate("/productos");
     };
 
+    const manejarCerrarSesion = () => {
+        vaciarCarrito(); // ← Primero vaciar el carrito en el estado
+        cerrarSesion(); // ← Luego cerrar sesión
+        navigate("/productos"); // ← Redirigir
+    };
+
     return (
         <div>
         {/* Info del usuario */}

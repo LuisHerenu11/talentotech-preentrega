@@ -1,74 +1,256 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import '../styles/navbarStyles.css';
-import { useAppContext } from '../context/AppContext'; 
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+//import '../styles/navbarStyles.css';
+//import { useAppContext } from '../context/AppContext'; 
+//import { FaShoppingCart } from 'react-icons/fa';
+import { useAuthContext } from '../context/AuthContext';
+import { useCartContext } from '../context/CartContext';
+import styled from 'styled-components';
 import { FaShoppingCart } from 'react-icons/fa';
 
 function Navbar() {
     // carrito traído del context
-    const { carrito, vaciarCarrito, agregarAlCarrito, quitarCantidad } = useAppContext();
+    //const { carrito, vaciarCarrito, agregarAlCarrito, quitarCantidad } = useAppContext();
+    const { usuario, isAuthenticated, cerrarSesion } = useAuthContext();
+    const { vaciarCarrito, carrito } = useCartContext();
     const navigate = useNavigate();
 
     // visibilidad del desplegable del carrito.
-    const [isCartOpen, setIsCartOpen] = useState(false);
+    //const [isCartOpen, setIsCartOpen] = useState(false);
 
     // totales
-    const totalItems = carrito.reduce((sum, item) => sum + (item.cantidad || 1), 0);
-    const total = carrito.reduce((sum, item) => sum + (Number(item.precio) * (item.cantidad || 1)), 0);
+    const totalItemsCarrito = carrito.reduce((sum, item) => sum + (item.cantidad || 1), 0);
+    //const total = carrito.reduce((sum, item) => sum + (Number(item.precio) * (item.cantidad || 1)), 0);
 
-    // toggle de carrito
+    /* toggle de carrito
     const toggleCart = () => {
         setIsCartOpen(!isCartOpen);
     };
-
+    
     const irAPagar = () => {
         setIsCartOpen(false);
         navigate("/pagar", { state: { carrito } });
     };
+    */
+
+    const manejarCerrarSesion = () => {
+        navigate("/productos");
+        setTimeout(() => {
+            vaciarCarrito();
+            cerrarSesion();
+        }, 100);
+    };
 
     return (
-        <nav className='navbar'>
-            <ul>
-                <li><Link to="/">INICIO</Link></li>
-                <li><Link to="/productos">CATALOGO</Link></li>
-                <li className="cart-icon-container">
-                    <button onClick={toggleCart} className="cart-icon-button">
-                        <FaShoppingCart />
-                        {/* badge con la cantidad de items */}
-                        {totalItems > 0 && <span className="cart-badge">{totalItems}</span>}
+        <>
+            <NavbarContainer className="navbar navbar-expand-lg navbar-dark fixed-top">
+                <div className="container-fluid">
+                    <Logo to="/" className="navbar-brand">JEWELS</Logo>
+                    
+                    <button 
+                        className="navbar-toggler" 
+                        type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#navbarContent"
+                        aria-controls="navbarContent" 
+                        aria-expanded="false" 
+                        aria-label="Toggle navigation"
+                    >
+                        <span className="navbar-toggler-icon"></span>
                     </button>
-                    {/* dropdown del carrito */}
-                    {isCartOpen && (
-                        <div className="cart-dropdown">
-                            {carrito.length === 0 ? (
-                                <p>El carrito está vacío</p>
-                            ) : (
-                                <>
-                                    <div className="cart-dropdown-items">
-                                        {carrito.map((item) => (
-                                            <div key={item.id} className="cart-dropdown-item">
-                                                <span>{item.nombre} (${Number(item.precio).toFixed(3)})</span>
-                                                <div className='cart-item-controls'>
-                                                    <button onClick={() => quitarCantidad(item.id)}>-</button>
-                                                    <span>{item.cantidad}</span>
-                                                    <button onClick={() => agregarAlCarrito(item)}>+</button>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <div className="cart-dropdown-footer">
-                                        <hr />
-                                        <strong>Total: ${Number(total).toFixed(3)}</strong>
-                                        <button onClick={vaciarCarrito}>Vaciar</button>
-                                        <button onClick={irAPagar}>Pagar</button>
-                                    </div>
-                                </>
+
+                    <div className="collapse navbar-collapse" id="navbarContent">
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li className="nav-item">
+                            <NavLink to="/" className="nav-link">Inicio</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink to="/productos" className="nav-link">Productos</NavLink>
+                        </li>
+                        {usuario?.nombre === "admin" && (
+                            <li className="nav-item">
+                            <NavLink to="/formulario-producto" className="nav-link">Agregar Producto</NavLink>
+                            </li>
+                        )}
+                        </ul>
+
+                        <SeccionUsuario className="d-flex align-items-center gap-3">
+                        <ContenedorCarrito> 
+                            <IconoCarrito to="/pagar" className="nav-link d-flex align-items-center">
+                            <span className="me-1">Carrito</span>
+                            <FaShoppingCart />  
+                            {totalItemsCarrito > 0 && (
+                                <ContadorCarrito>
+                                    {totalItemsCarrito}
+                                </ContadorCarrito>
                             )}
-                        </div>
-                    )}
-                </li>
-                <li><Link to="/iniciar-sesion">INICIAR SESION</Link></li>
-            </ul>
-        </nav>
+                            </IconoCarrito>
+                        </ContenedorCarrito>
+
+                        {isAuthenticated ? (
+                            <ContenedorUsuario className="d-flex align-items-center gap-3">
+                            <Bienvenida>Hola, {usuario.nombre}</Bienvenida>
+                            
+                            {usuario.nombre === "admin" && (
+                                <NavLinkAdmin to="/dashboard" className="nav-link">Dashboard</NavLinkAdmin>
+                            )}
+                            
+                            <BotonCerrarSesion onClick={manejarCerrarSesion} className="btn btn-outline-light btn-sm">
+                                Cerrar Sesión
+                            </BotonCerrarSesion>
+                            </ContenedorUsuario>
+                        ) : (
+                            <NavLink to="/iniciar-sesion" className="nav-link">Iniciar Sesión</NavLink>
+                        )}
+                        </SeccionUsuario>
+                    </div>
+                </div>
+            </NavbarContainer>
+            <NavbarSpacer />
+        </>
     );
 }export default Navbar;
+
+
+// Styled Components actualizados
+const NavbarContainer = styled.nav`
+    background-color: #556B2F !important;
+    padding: 0.5rem 1rem;
+`;
+
+const NavbarSpacer = styled.div`
+    height: 80px;
+
+    @media (max-width: 991.98px) {
+        height: 76px;
+    }
+`;
+
+const Logo = styled(Link)`
+    color: white !important;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    
+    &:hover {
+        color: white !important;
+    }
+`;
+
+// NavLink normal (para usuarios)
+const NavLink = styled(Link)`
+    color: white !important;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    
+    &:hover {
+        color: white !important;
+        text-decoration: underline;
+    }
+`;
+
+// NavLink especial para admin
+const NavLinkAdmin = styled(Link)`
+    color: black !important;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+
+    &:hover {
+        color: gold !important;
+        text-decoration: underline;
+    }
+`;
+
+const Bienvenida = styled.span`
+    color: white;
+    font-size: 0.9rem;
+    margin: 0;
+    white-space: nowrap;
+
+    @media (max-width: 991.98px) {
+        margin-bottom: 0.5rem;
+    }
+`;
+
+const BotonCerrarSesion = styled.button`
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &:hover {
+        background: white;
+        color: #556B2F;
+    }
+
+    @media (max-width: 991.98px) {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+`;
+
+const ContenedorCarrito = styled.div`
+    position: relative;
+    display: flex;
+    align-items: center;
+`;
+
+const IconoCarrito = styled(Link)`
+    color: white !important;
+    text-decoration: none;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: 1rem;
+    gap: 5px;
+
+    &:hover {
+        color: gold !important;
+    }
+`;
+
+const ContadorCarrito = styled.span`
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+`;
+
+const SeccionUsuario = styled.div`
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    @media (max-width: 991.98px) {
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        width: 100%;
+    }
+`;
+
+const ContenedorUsuario = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    @media (max-width: 991.98px) {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+    }
+`;

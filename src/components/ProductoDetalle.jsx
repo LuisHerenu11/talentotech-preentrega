@@ -26,11 +26,11 @@ const ProductoDetalle = () => {
                     {producto.nombre}
                     <br />
                     <p>Precio: ${producto.precio}</p>
-                    <p><strong>Categoría:</strong> {producto.categoria}</p>
                     <p><strong>Descripción: </strong>{producto.descripcion}</p>
+                    <p><strong>Categoría:</strong> {producto.categoria}</p>
                 </li>
                 <hr />
-                <Link to={`/productos`}><button>Volver</button></Link>
+                <Link to={`/productos`}><button>Volver a Productos</button></Link>
             </ul>
         </>
     );
