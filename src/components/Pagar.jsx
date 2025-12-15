@@ -7,7 +7,7 @@ export default function Pagar() {
 
     // Calculo del total
     const total = carrito.reduce(
-        (suma, producto) => suma + Number(producto.price),
+        (suma, producto) => suma + Number(producto.precio),
         0
     );
 

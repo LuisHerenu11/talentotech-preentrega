@@ -22,12 +22,12 @@ const ProductoDetalle = () => {
             <h2>Detalles del Producto {id}</h2>
             <ul>
                 <li key={producto.id}>
-                    <img src={producto.image} alt={producto.title} width="30%" />
-                    {producto.title}
+                    <img src={producto.avatar} alt={producto.nombre} width="30%" />
+                    {producto.nombre}
                     <br />
-                    <p>Precio: ${producto.price}</p>
-                    <p><strong>Categoría:</strong> {producto.category}</p>
-                    <p><strong>Descripción: </strong>{producto.description}</p>
+                    <p>Precio: ${producto.precio}</p>
+                    <p><strong>Categoría:</strong> {producto.categoria}</p>
+                    <p><strong>Descripción: </strong>{producto.descripcion}</p>
                 </li>
                 <hr />
                 <Link to={`/productos`}><button>Volver</button></Link>
