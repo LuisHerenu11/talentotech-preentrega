@@ -37,8 +37,8 @@ function App() {
               <Route path="/productos/:id" element={<ProductoDetalle />}/>
               <Route path="/iniciar-sesion" element={<IniciarSesion />}/>
               <Route path="/pagar" element={ <RutaProtegida><Pagar/></RutaProtegida>}/>
-              <Route path="/dashboard" element={<RutaProtegida soloAdmin={true}><Dashboard /></RutaProtegida>}/>
-              <Route path="/formulario-producto" element={<RutaProtegida><FormularioProducto /></RutaProtegida>}/>
+              <Route path="/dashboard" element={<RutaProtegida soloAdmin={true}><Dashboard/></RutaProtegida>}/>
+              <Route path="/formulario-producto" element={<RutaProtegida soloAdmin={true}><FormularioProducto /></RutaProtegida>}/>
               <Route path="/eliminar-producto" element={<RutaProtegida><EliminarProducto /></RutaProtegida>}/>
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

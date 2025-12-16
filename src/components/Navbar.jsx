@@ -114,8 +114,9 @@ function Navbar() {
 
 // Styled Components actualizados
 const NavbarContainer = styled.nav`
-    background-color: #556B2F !important;
-    padding: 0.5rem 1rem;
+    background-color: hsl(from #081A4E h 90% 25%) !important;
+    padding: 1.2;
+    font-size: 1.6rem;
 `;
 
 const NavbarSpacer = styled.div`
@@ -133,7 +134,7 @@ const Logo = styled(Link)`
     text-decoration: none;
     
     &:hover {
-        color: white !important;
+        color: hsl(from #eae6ca h 90% 100%) !important;
     }
 `;
 
@@ -144,7 +145,7 @@ const NavLink = styled(Link)`
     padding: 0.5rem 1rem;
     
     &:hover {
-        color: white !important;
+        color: hsl(from #eae6ca h 90% 100%) !important;
         text-decoration: underline;
     }
 `;
@@ -175,7 +176,7 @@ const Bienvenida = styled.span`
 
 const BotonCerrarSesion = styled.button`
     background: transparent;
-    color: white;
+    color: gold;
     border: 1px solid white;
     border-radius: 4px;
     padding: 0.5rem 1rem;
@@ -206,7 +207,7 @@ const IconoCarrito = styled(Link)`
     display: flex;
     align-items: center;
     position: relative;
-    font-size: 1rem;
+    font-size: 1.2rem;
     gap: 5px;
 
     &:hover {
