@@ -26,7 +26,7 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   
   return (
-    <div style={{minHeight: '100vh'}}>
+    <div style={{minHeight: '100vh', backgroundColor: 'black'}}>
       <AuthProvider>
         <CartProvider>
           <ProductsProvider>
